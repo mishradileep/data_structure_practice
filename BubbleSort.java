@@ -1,3 +1,10 @@
+/**
+ * Bubble Sort & Recursive Bubble Sort algo inplementation.
+ *
+ * @author Dileep Mishra mishradileep[at]gmail.com
+ */
+
+
 class BubbleSort {
     public int[] bubbleSort_algo(int[] input) {
         int n = input.length;
@@ -12,18 +19,43 @@ class BubbleSort {
         }
         return input;
     }
-    public static void main(String[] args) {
-        System.out.println("Originl array");
-        int[] myArrSorted, myArr = {7,8,10,3,12,16,9};
-        for (int i = 0; i < myArr.length; i++) {
-            System.out.print(myArr[i] + " | ");
+
+    public void RecursiveBubbleSort(int[] input, int lenght) {
+        if(lenght == 1) {
+            return;
+        }
+        // Pass of bubble sort. Largest element is bubbled at end of the array.
+        for(int i =0; i < lenght - 1; i++) {
+            if(input[i] > input[i+1]) {
+                int temp = input[i];
+                input[i] = input[i+1];
+                input[i+1] = temp;
+            }
+            RecursiveBubbleSort(input, lenght-1);
+        }
+    }
+
+    public void printArr(int[] arr) {
+        int n = arr.length;
+        for(int i = 0; i < n; i++) {
+            System.out.print(arr[i] + ", ");
         }
         System.out.println("");
-        System.out.println("Sorted array");
+    }
+
+    public static void main(String[] args) {
+
+        int[] myArrSorted, myArr = {7,8,10,3,12,16,9};
         BubbleSort myBubbleSort = new BubbleSort();
-        myArrSorted = myBubbleSort.bubbleSort_algo(myArr);
-        for (int i = 0; i < myArrSorted.length; i++) {
-            System.out.print(myArrSorted[i] + " | ");
-        }
+
+        System.out.println("Originl Array");
+        myBubbleSort.printArr(myArr);
+
+        System.out.println("Bubble Sort Array");
+        myBubbleSort.printArr(myBubbleSort.bubbleSort_algo(myArr));
+
+        System.out.println("Recursive Bubble Sort Array");
+        myBubbleSort.RecursiveBubbleSort(myArr, myArr.length);
+        myBubbleSort.printArr(myArr);
     }
 }
